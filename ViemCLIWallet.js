@@ -21,23 +21,22 @@ const balance = await publicClient.getBalance({
   })
 console.log(`Balance: ${balance}`)   
 
-// 查询nonce
-const nonce = await publicClient.getTransactionCount({
-    address: account.address
-  })
-console.log('Nonce:', nonce)
-
 // 构建交易
 const request = await walletClient.prepareTransactionRequest({
     from: account.address,
     to: '0x36912Eb785f5A358Fc0EA9Cd0FB87041907B59c5',
+    value: parseEther('0.001'),
     data: '0x',
-    maxFeePerGas: parseGwei('100'),
-    maxPriorityFeePerGas: parseGwei('5'),
-    nonce: nonce,
     type: 'eip1559',
-    value: parseEther('0.001')
+    maxFeePerGas: parseGwei('100'),
+    maxPriorityFeePerGas: parseGwei('5')
   })
+const nonce = await publicClient.getTransactionCount({address: account.address})
+request.nonce = nonce
+const gasEstimate = await publicClient.estimateGas(request)
+request.gas = gasEstimate
+console.log(`Nonce: ${nonce}. Gas estimate: ${gasEstimate}`)
+
 
 
 // 签名交易
@@ -45,7 +44,7 @@ const serializedTransaction = await walletClient.signTransaction(request)
 
 // 发送交易
 const hash = await walletClient.sendRawTransaction({ serializedTransaction })
-console.log(`Transaction hash: ${hash}`)
+console.log(`Transaction: https://sepolia.etherscan.io/tx/${hash}`)
 
 // // 等待交易
 // const transaction = await publicClient.waitForTransactionReceipt( {hash: hash })
