@@ -67,4 +67,4 @@ if owner:
 
 metadata_uri = get_metadata_uri_of_token_id(token_id)
 if metadata_uri:
-    print(f"Metadata URI for token ID {token_id}: {metadata_uri}")
+    print(f"Metadata URI for token ID {token_id}: {metadata_uri}")  
