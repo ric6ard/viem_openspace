@@ -1,46 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Token Owner and Metadata Info</title>
-</head>
-<body>
-    <h1>Token Information</h1>
-    <div>
-        <h2>Owner Info</h2>
-        <p id="owner-info">Loading...</p>
-    </div>
-    <div>
-        <h2>Metadata Info</h2>
-        <p id="metadata-info">Loading...</p>
-    </div>
-
-    <script type="module">
-        import { getOwnerOfTokenID, getMetadataURIOfTokenID } from './index.js';
-
-        const address = '0x0483b0dfc6c78062b9e999a82ffb795925381415';
-        const tokenId = 1;
-
-        getOwnerOfTokenID(address, tokenId).then((owner) => {
-            document.getElementById('owner-info').textContent = `Owner of token ID ${tokenId}: ${owner}`;
-        }).catch((error) => {
-            if (error.data && error.data.revert) {
-                document.getElementById('owner-info').textContent = `Token ID ${tokenId} does not exist: ${error.data.revert}`;
-            } else {
-                document.getElementById('owner-info').textContent = `Error: ${error.message}`;
-            }
-        });
-
-        getMetadataURIOfTokenID(address, tokenId).then((metadataURI) => {
-            document.getElementById('metadata-info').textContent = `Metadata URI for token ID ${tokenId}: ${metadataURI}`;
-        }).catch((error) => {
-            if (error.data && error.data.revert) {
-                document.getElementById('metadata-info').textContent = `Token ID ${tokenId} does not exist: ${error.data.revert}`;
-            } else {
-                document.getElementById('metadata-info').textContent = `Error: ${error.message}`;
-            }
-        });
-    </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/reown.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reown Appkit Example</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
