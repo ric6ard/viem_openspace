@@ -3,7 +3,9 @@ import { mainnet, arbitrum, sepolia } from '@reown/appkit/networks'
 import type { AppKitNetwork } from '@reown/appkit/networks'
 
 // Get projectId from https://cloud.reown.com
-export const projectId = import.meta.env.VITE_PROJECT_ID || "b56e18d47c72ab683b10814fe9495694" // this is a public projectId only to use on localhost
+export const projectId = import.meta.env.VITE_PROJECT_ID || "1deba5bc8eb18bba6c4752888a995147" // this is a public projectId only to use on localhost
+// export const projectId = "1deba5bc8eb18bba6c4752888a995147" // this is a public projectId only to use on localhost
+console.log(projectId)
 
 if (!projectId) {
   throw new Error('Project ID is not defined')
